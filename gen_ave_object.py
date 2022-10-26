@@ -75,7 +75,7 @@ class main_generalzied_object:
         return -1
     def lehmer_for_array(self, x):
         if self.check_array_positivity(x):
-            return np.sum([xx*self.p for xx in x])/ np.sum([xx*(self.p-1) for xx in x])
+            return np.sum([xx**self.p for xx in x])/ np.sum([xx**(self.p-1) for xx in x])
 
         print("Please provide positive data")
         return -1

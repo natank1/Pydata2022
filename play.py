@@ -5,7 +5,104 @@ from sklearn.metrics import confusion_matrix
 from sklearn.model_selection import train_test_split
 from xgboost import XGBClassifier
 import matplotlib.pyplot as plt
+# plt.hlines(y=1, xmin=1, xmax=4)
+# plt.text(4, 1, ' somelabel1', ha='left', va='center')
+# plt.show()
+# exit(3333)
+
 def plt_bar(y_test, outp):
+    mm = confusion_matrix(y_test, outp)
+    precision = mm[0, 0] / sum(mm[:, 0])
+    recall = mm[0, 0] / sum(mm[0, :])
+    p00 = [ -100,-50,-10,-2, -1, -0.75,-0.5,-0.25,-0.1 ,0.1,0.25,0.5,0.75, 1,2, 3, 4,10,20,30,50,100]
+    p00 = [-1.5, -1.2,-1.1,-1.04,  -1, -0.75, -0.5, -0.25, -0.1, 0.1, 0.25, 0.5, 0.75,1,1.01,1.05]
+
+    print('precc=', precision, 'rec=', recall)
+    tt = []
+    precision =0.9
+    recall =0.2
+    for pi in p00:
+        tt.append(pfunc(precision,recall, pi))
+        print(pi, tt)
+    print("ok")
+    # fig = plt.figure(figsize=(10, 5))
+    fig = plt.figure()
+
+    # Adding axes on the figure
+    ax = fig.add_subplot(111)
+
+    # Plotting data on the axes
+    # ax.plot(p00, tt, color='maroon')
+    # creating the bar plot
+    xx = plt.plot(p00, tt, color='maroon')
+
+
+
+    ty = []
+    # for pi in [-1, 1]:
+    #     ty.append(pfunc(0.94, 0.6, pi))
+    #     print(pi, tt)
+    print("ok")
+    # plt.hlines(y=precision, xmin=p00[0], xmax=p00[-1], linewidth=2, color='g')
+    # plt.hlines(y=recall, xmin=p00[0], xmax=p00[-1], linewidth=2, color='b')
+    # plt.hlines(y=tt[4], xmin=p00[0], xmax=p00[-1], linewidth=2, color='g')
+    # plt.text(-100, 0.848 , ' P=-1 Harmonic', ha='left', va='center')
+    # plt.arrow(-50, tt[4]-0.01, dx=0, dy=-0.002, head_width = 3.2)
+    plt.plot([-1],[tt[4]], marker="o", markersize=5, markeredgecolor="blue", markerfacecolor="green")
+    plt.plot([1], [tt[13]], marker="o", markersize=5, markeredgecolor="green", markerfacecolor="blue")
+
+    plt.annotate('Harmonic Mean', xy=(-1, tt[4]), xytext=(-0.5, 0.32),
+                 arrowprops=dict(facecolor='black', shrink=0.005))
+    #
+    plt.annotate('Arithemtic Mean', xy=(1, tt[13]), xytext=(-0.5, 0.55),
+                  arrowprops=dict(facecolor='black', shrink=0.005))
+
+    #
+    # ax.set_xlabel("P ")
+    # ax.set_ylabel("Score")
+    # # plt.ylabel("Scores")
+    # ax.set_title("Titanic P Sscores Histogram")
+    # ax.legend(['Scores curve'])
+    plt.plot(p00, tt, color='maroon')
+    plt.xlabel("P ")
+    plt.ylabel("Score")
+    # plt.ylabel("Scores")
+    plt.title("Titanic P Sscores Histogram")
+    plt.legend(['Scores curve'])
+    plt.show()
+    # plt.annotate('Haarmonic', xy=(-70, 0.848),
+    #             xytext=("Staten Island", 5000),
+    #             va='center',
+    #             ha='center',
+    #             arrowprops={'arrowstyle': '-|>', 'connectionstyle': 'angle3,angleA=0,angleB=90'})
+
+    # plt.hlines(y=tt[13], xmin=p00[0], xmax=p00[-1], linewidth=2, color='b')
+    # plt.text(-100, 0.851, ' P=1  Arithmetic', ha='left', va='center')
+    plt.plot(p00, tt, color='maroon')
+    plt.xlabel("P ")
+    plt.ylabel("Score")
+    # plt.ylabel("Scores")
+    plt.title("Titanic P Sscores Histogram")
+    plt.legend(['Scores curve'])
+    plt.plot([1], [tt[13]], marker="o", markersize=5, markeredgecolor="g", markerfacecolor="blue")
+
+    plt.annotate('Arithemtic Mean', xy=(1, tt[13]), xytext=(75, 0.853),
+                 arrowprops=dict(facecolor='black', shrink=0.005))
+
+    # xy = plt.plot([-1], ty[0], color='g'                 )
+    # xy = plt.plot([1], ty[1], color='b')
+
+    # xy[1].set_color('b')
+    # xx[4].set_color( 'g')
+
+    # plt.set_xlabel("P ")
+    # plt.set_ylabel("Score")
+    # # plt.ylabel("Scores")
+    # plt.set_title("Titanic P Sscores Histogram")
+    # plt.legend(['Scores curve'])
+    plt.show()
+    return
+def plt_bar_o(y_test, outp):
     mm = confusion_matrix(y_test, outp)
     precision = mm[0, 0] / sum(mm[:, 0])
     recall = mm[0, 0] / sum(mm[0, :])
